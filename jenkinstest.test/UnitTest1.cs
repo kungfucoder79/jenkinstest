@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading;
 
 namespace jenkinstest.test
 {
@@ -8,6 +9,7 @@ namespace jenkinstest.test
         [TestMethod]
         public void TestMethod1()
         {
+            Thread.Sleep(10000);
         }
     }
 }

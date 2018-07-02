@@ -11,5 +11,11 @@ namespace jenkinstest.test
         {
             Thread.Sleep(10000);
         }
+
+        [TestMethod]
+        public void TestMethod2()
+        {
+            Thread.Sleep(2000);
+        }
     }
 }

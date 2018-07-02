@@ -9,7 +9,7 @@ namespace jenkinstest.test
         [TestMethod]
         public void TestMethod1()
         {
-            //Thread.Sleep(10000);
+            Thread.Sleep(10000);
         }
     }
 }

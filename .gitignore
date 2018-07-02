@@ -4,5 +4,6 @@
 
 /.vs
 *.user
-/jenkinstest/obj
+obj/
 bin/
+*.ncrunchsolution

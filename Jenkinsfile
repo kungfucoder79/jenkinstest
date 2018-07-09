@@ -4,37 +4,37 @@ def nunitConsole = "M:/Source/dockerstuffs/.nuget/packages/nunit.consolerunner/3
 
 pipeline 
 {
-  agent 
-  {
-		node("testman")
+	agent 
+	{
+		node 
 		{
-			stages
+			label 'performance'
+		}    
+	}
+	stages
+	{
+		stage ("Testage")
+		{
+			steps
 			{
-				stage ("Testage")
+				//powershell "${WORKSPACE}/capture-platform-tests/build.ps1 -Verbosity Diagnostic --target='build'"
+				bat "${nunitConsole} --result=$WORKSPACE/Barcode.Test.Result.xml $WORKSPACE/${BCTestProj}"
+				bat "${nunitConsole} --result=$WORKSPACE/OCR.Test.Result.xml $WORKSPACE/${OCRTestProj}"
+			}
+			post
+			{
+				always
 				{
-					steps
-					{
-						//powershell "${WORKSPACE}/capture-platform-tests/build.ps1 -Verbosity Diagnostic --target='build'"
-						bat "${nunitConsole} --result=$WORKSPACE/Barcode.Test.Result.xml $WORKSPACE/${BCTestProj}"
-						bat "${nunitConsole} --result=$WORKSPACE/OCR.Test.Result.xml $WORKSPACE/${OCRTestProj}"
-					}
-					post
-					{
-						always
-						{
-							nunit failIfNoResults: false, testResultsPattern: '*.Test.Result.xml'
-						}
-					 }
+					nunit failIfNoResults: false, testResultsPattern: '*.Test.Result.xml'
 				}
-				stage("Say Whaaaaatttttt!!!!!!!")
-				{
-					steps
-					{
-						emailext body: 'http://localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/testReport/history/', subject: "${JOB_NAME} (${BUILD_NUMBER})", to: 'tim.bush@onbase.com'
-					}
-				}
+			}
+		}
+		stage("Say Whaaaaatttttt!!!!!!!")
+		{
+			steps
+			{
+				emailext body: 'http://localhost:8080/job/$JOB_NAME/$BUILD_NUMBER/testReport/history/', subject: "${JOB_NAME} (${BUILD_NUMBER})", to: 'tim.bush@onbase.com'
 			}
 		}
 	}
 }
-

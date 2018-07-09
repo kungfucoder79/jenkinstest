@@ -13,6 +13,13 @@ pipeline
 	}
 	stages
 	{
+		stage('Checkout Sources')
+		{
+			steps 
+			{
+				checkout scm
+			}
+		}
 		stage ("Testage")
 		{
 			steps

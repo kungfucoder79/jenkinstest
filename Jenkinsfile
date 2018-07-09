@@ -9,10 +9,19 @@ node("testman")
     {
         stage ("Testage")
         {
-            //powershell "${WORKSPACE}/capture-platform-tests/build.ps1 -Verbosity Diagnostic --target='build'"
-            bat "${nunitConsole} --result=$WORKSPACE/Barcode.Test.Result.xml $WORKSPACE/${BCTestProj}"
-            bat "${nunitConsole} --result=$WORKSPACE/OCR.Test.Result.xml $WORKSPACE/${OCRTestProj}"
-       
+			steps
+			{
+				//powershell "${WORKSPACE}/capture-platform-tests/build.ps1 -Verbosity Diagnostic --target='build'"
+				bat "${nunitConsole} --result=$WORKSPACE/Barcode.Test.Result.xml $WORKSPACE/${BCTestProj}"
+				bat "${nunitConsole} --result=$WORKSPACE/OCR.Test.Result.xml $WORKSPACE/${OCRTestProj}"
+			}
+			post
+			{
+				always
+				{
+					nunit failIfNoResults: false, testResultsPattern: '*.Test.Result.xml'
+				}
+			}
         }
         
     }
@@ -22,10 +31,10 @@ node("testman")
     }
     finally
     {
-        stage("Publish Stuffs")
+        /*stage("Publish Stuffs")
         {
             nunit failIfNoResults: false, testResultsPattern: '*.Test.Result.xml'
-        }
+        }*/
         
         stage("Say Whaaaaatttttt!!!!!!!")
         {

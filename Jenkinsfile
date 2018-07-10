@@ -9,9 +9,9 @@ node("testman")
     {
         stage ("Testage")
         {
-            //powershell "${WORKSPACE}/capture-platform-tests/build.ps1 -Verbosity Diagnostic --target='build'"
-            bat "${nunitConsole} --result=$WORKSPACE/Barcode.Test.Result.xml $WORKSPACE/${BCTestProj}"
-            bat "${nunitConsole} --result=$WORKSPACE/OCR.Test.Result.xml $WORKSPACE/${OCRTestProj}"
+            powershell "${WORKSPACE}/build.ps1 -Verbosity Diagnostic --target='build'"
+            //bat "${nunitConsole} --result=$WORKSPACE/Barcode.Test.Result.xml $WORKSPACE/${BCTestProj}"
+            //bat "${nunitConsole} --result=$WORKSPACE/OCR.Test.Result.xml $WORKSPACE/${OCRTestProj}"
        
         }
         

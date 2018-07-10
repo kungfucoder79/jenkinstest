@@ -29,8 +29,7 @@ node("testman")
         
         stage("Say Whaaaaatttttt!!!!!!!")
         {
-		
-            emailext body: 'http://localhost:8080/job/$JOB_NAME/job/$BRANCH_NAME/$BUILD_NUMBER/testReport/history/', subject: "${JOB_NAME} (${BUILD_NUMBER})", to: 'tim.bush@onbase.com'
+            emailext body: '$BUILD_URL/testReport/history/', subject: "${JOB_NAME} (${BUILD_NUMBER})", to: 'tim.bush@onbase.com'
         }
     }
 }

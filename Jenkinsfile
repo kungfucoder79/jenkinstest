@@ -10,6 +10,7 @@ node("testman")
         stage ("Testage")
         {
             powershell "${WORKSPACE}/build.ps1 -Verbosity Diagnostic --target='build'"
+			powershell "${WORKSPACE}/build.ps1 -Verbosity Diagnostic --target='test'"
             //bat "${nunitConsole} --result=$WORKSPACE/Barcode.Test.Result.xml $WORKSPACE/${BCTestProj}"
             //bat "${nunitConsole} --result=$WORKSPACE/OCR.Test.Result.xml $WORKSPACE/${OCRTestProj}"
        

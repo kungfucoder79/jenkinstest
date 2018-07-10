@@ -25,7 +25,7 @@ node("testman")
     {
         stage("Publish Stuffs")
         {
-            nunit failIfNoResults: false, testResultsPattern: '*.Test.Result.xml'
+            nunit failIfNoResults: false, testResultsPattern: '*TestResult.xml'
         }
         
         stage("Say Whaaaaatttttt!!!!!!!")
